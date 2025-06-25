@@ -1,6 +1,6 @@
 import cv2
 import mediapipe as mp
-from src.clothing_overlay import overlay_png
+from clothing_overlay import overlay_png, overlay_logo
 
 
 # Initialize MediaPipe Face Mesh and Pose
@@ -80,7 +80,7 @@ while cap.isOpened():
 
         # Load tail image and resize
         tail_img = cv2.imread("/Users/nastyabekesheva/Projects/abitka/abitka/data/хвіст.png", cv2.IMREAD_UNCHANGED)
-        tail_scale = 0.5
+        tail_scale = 0.65
         tail_resized = cv2.resize(tail_img, (0, 0), fx=tail_scale, fy=tail_scale)
         tail_h, tail_w = tail_resized.shape[:2]
 
@@ -89,14 +89,17 @@ while cap.isOpened():
 
         # Tail position: align tail top-left to skirt top-left + small right offset (e.g., +15 px)
         offset_x = 15
-        tail_pos = (skirt_top_left[0] + 100, skirt_top_left[1] + 150)
+        tail_pos = (skirt_top_left[0] + 20, skirt_top_left[1] + 210)
 
         # Overlay skirt and tail
-        frame = overlay_png(frame, "/Users/nastyabekesheva/Projects/abitka/abitka/data/skirt_flipped.png", skirt_pos, scale=skirt_scale)
         frame = overlay_png(frame, "/Users/nastyabekesheva/Projects/abitka/abitka/data/хвіст.png", tail_pos, scale=tail_scale)
+        frame = overlay_png(frame, "/Users/nastyabekesheva/Projects/abitka/abitka/data/skirt_flipped.png", skirt_pos, scale=skirt_scale)
+        
 
     if head_top:
         frame = overlay_png(frame, "/Users/nastyabekesheva/Projects/abitka/abitka/data/ears_wide.png", head_top, scale=0.5)
+
+    frame = overlay_logo(frame, "/Users/nastyabekesheva/Projects/abitka/abitka/data/nn fti 7.0.png", opacity=0.7)
 
     cv2.imshow("Funny AR Try-On", frame)
     if cv2.waitKey(5) & 0xFF == 27:  # ESC to quit
