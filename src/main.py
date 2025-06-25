@@ -58,12 +58,6 @@ while cap.isOpened():
         top_x = eye_center[0]
         head_top = (top_x, top_y)
 
-        # Debug dots
-        cv2.circle(frame, forehead, 4, (0, 255, 255), -1)
-        cv2.circle(frame, chin, 4, (255, 0, 255), -1)
-        cv2.circle(frame, head_top, 6, (0, 0, 255), -1)  # new top
-        cv2.circle(frame, left_ear, 3, (255, 255, 0), -1)
-        cv2.circle(frame, right_ear, 3, (255, 255, 0), -1)
 
     if pose_res.pose_landmarks:
         lm = pose_res.pose_landmarks.landmark
@@ -99,7 +93,7 @@ while cap.isOpened():
     if head_top:
         frame = overlay_png(frame, "/Users/nastyabekesheva/Projects/abitka/abitka/data/ears_wide.png", head_top, scale=0.5)
 
-    frame = overlay_logo(frame, "/Users/nastyabekesheva/Projects/abitka/abitka/data/nn fti 7.0.png", opacity=0.7)
+    frame = overlay_logo(frame, "/Users/nastyabekesheva/Projects/abitka/abitka/data/nastya_skin_photo_s_ushkami.png", opacity=0.7)
 
     cv2.imshow("Funny AR Try-On", frame)
     if cv2.waitKey(5) & 0xFF == 27:  # ESC to quit
