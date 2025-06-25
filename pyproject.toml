@@ -1,0 +1,27 @@
+[project]
+name = "funny-3d-tryon"
+version = "0.1"
+description = "Tracks people and overlays 3D clothes"
+authors = [
+    {name = "Anastasia Bekesheva"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = "^3.10"
+dependencies = [
+    "mediapipe (>=0.10.21,<0.11.0)",
+    "open3d (>=0.19.0,<0.20.0)"
+]
+
+packages = [
+    { include = "src" }
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+isort = "^6.0.1"
+
